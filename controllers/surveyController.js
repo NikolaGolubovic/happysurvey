@@ -110,6 +110,7 @@ router.post("/create", auth, async (req, res, next) => {
 
 router.post("/updateVotes", async (req, res) => {
   const { data, id } = req.body;
+  console.log("hello");
   let queryString = `UPDATE question_votes SET score = score +1
   FROM question_choices, question, survey
   WHERE question_votes.question_choices_id = question_choices.id
