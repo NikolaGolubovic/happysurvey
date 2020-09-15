@@ -35,7 +35,7 @@ router.get("/results/:id", async (req, res) => {
   ON question.survey_id = survey.id
   WHERE survey.id = $1`.replace(/(?:\r\n|\r|\n)/g, "");
   const result = await db.query(resultString, [id]);
-  res.status(200).send(result.rows);
+  res.send(result.rows);
 });
 
 router.get("/recentresults", async (req, res) => {
