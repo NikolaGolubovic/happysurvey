@@ -3,6 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
 
+const csp = require("helmet-csp");
+
 const surveyController = require("./controllers/surveyController");
 const usersController = require("./controllers/usersController");
 const loginController = require("./controllers/loginController");
@@ -11,47 +13,45 @@ const middleware = require("./utils/middleware");
 
 const app = express();
 
+app.use(
+  csp({
+    directives: {
+      defaultSrc: ["'self'"],
+      fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://surveyjs.azureedge.net/1.8.0/modern.css",
+        "https://fonts.googleapis.com",
+        "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+        "'sha256-OTeu7NEHDo6qutIWo0F2TmYrDhsKWCzrUgGoxxHGJ8o='",
+      ],
+      imgSrc: ["'self'", "http://localhost:3005"],
+      scriptSrc: [
+        "'self'",
+        "unsafe-inline",
+        "'sha256-eE1k/Cs1U0Li9/ihPPQ7jKIGDvR8fYw65VJw+txfifw='",
+      ],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+    reportOnly: false,
+  })
+);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "build")));
 
 app.use(morgan("dev"));
 
-//app.use(express.static(path.join(__dirname, "build")));
-
 app.use("/api/survey", surveyController);
 app.use("/api/users", usersController);
 app.use("/api/login", loginController);
 
-app.get("/", function (req, res) {
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-  });
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-// let protected = ["transformed.js", "main.css", "favicon.ico"];
-
-// app.get("/*", (req, res) => {
-//   let path = req.params["0"].substring(1);
-
-//   if (protected.includes(path)) {
-//     // Return the actual file(s)
-//     res.sendFile(`${__dirname}/build/${path}`);
-//   } else {
-//     // Otherwise, redirect to /build/index.html
-//     res.sendFile(`${__dirname}/build/index.html`);
-//   }
-// });
-
-// app.get("/*", function (req, res) {
-//   console.log("id");
-//   res.sendFile("index.html", {
-//     root: path.join(__dirname, "./build/index.html"),
-//   });
-// });
-
-// app.get("/*/:id", function (req, res) {
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
 
 app.use(middleware.errorHandler);
 
