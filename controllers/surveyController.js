@@ -59,7 +59,7 @@ router.get("/single/:id", async (req, res) => {
     surveyTitle: singleSurvey.rows[0].survey_name,
   });
 });
-
+``;
 router.post("/create", auth, async (req, res, next) => {
   try {
     const decoded = jwt.verify(req.token, process.env.SECRET);
