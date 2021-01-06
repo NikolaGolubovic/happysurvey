@@ -13,12 +13,14 @@ const middleware = require("./utils/middleware");
 
 const app = express();
 
+app.use(cors());
+
 app.use(
   csp({
     directives: {
       defaultSrc: ["*"],
       fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
-      connectSrc: ["'self'", "http://localhost:3005"],
+      connectSrc: ["self", "http://localhost:3005"],
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
@@ -40,7 +42,6 @@ app.use(
   })
 );
 
-app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "build")));
 
