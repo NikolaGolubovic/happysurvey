@@ -22,8 +22,8 @@ app.use(
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
-        // "https://surveyjs.azureedge.net/1.8.0/modern.css",
-        // "https://fonts.googleapis.com",
+        "https://surveyjs.azureedge.net/1.8.0/modern.css",
+        "https://fonts.googleapis.com",
         // "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
         // "'sha256-OTeu7NEHDo6qutIWo0F2TmYrDhsKWCzrUgGoxxHGJ8o='",
       ],
