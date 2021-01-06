@@ -16,13 +16,7 @@ const app = express();
 app.use(
   csp({
     directives: {
-      defaultSrc: [
-        "'self'",
-        "data:",
-        "https:",
-        "htt:",
-        "top/http://localhost:3005/api/survey/single/",
-      ],
+      defaultSrc: ["none"],
       fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
       connectSrc: ["'self'", "http://localhost:3005"],
       styleSrc: [
@@ -33,7 +27,7 @@ app.use(
         // "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
         // "'sha256-OTeu7NEHDo6qutIWo0F2TmYrDhsKWCzrUgGoxxHGJ8o='",
       ],
-      imgSrc: ["*", "self", "data:"],
+      imgSrc: ["*"],
       scriptSrc: [
         "'self'",
         "unsafe-inline",
