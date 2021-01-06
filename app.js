@@ -16,7 +16,7 @@ const app = express();
 app.use(
   csp({
     directives: {
-      defaultSrc: ["none"],
+      defaultSrc: ["*"],
       fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
       connectSrc: ["'self'", "http://localhost:3005"],
       styleSrc: [
