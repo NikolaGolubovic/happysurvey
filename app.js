@@ -20,7 +20,7 @@ app.use(
     directives: {
       defaultSrc: ["*"],
       fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
-      connectSrc: ["self", "http://localhost:3005"],
+      connectSrc: ["'self'", "http://localhost:3005"],
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
