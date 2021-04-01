@@ -3,10 +3,6 @@ const bcrypt = require("bcrypt");
 
 const db = require("../models/db");
 
-router.get("/", (req, res) => {
-  res.send("hello from router!");
-});
-
 router.post("/", async (req, res, next) => {
   try {
     const { username, password: rowPass } = req.body;
