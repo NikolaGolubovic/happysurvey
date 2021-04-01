@@ -18,7 +18,7 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       fontSrc: ["https://fonts.googleapis.com/", "https://fonts.gstatic.com"],
-      connectSrc: ["'self'", "http://localhost:3005"],
+      connectSrc: ["'self'"],
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
@@ -27,7 +27,7 @@ app.use(
         "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
         "'sha256-OTeu7NEHDo6qutIWo0F2TmYrDhsKWCzrUgGoxxHGJ8o='",
       ],
-      imgSrc: ["'self'", "http://localhost:3005"],
+      imgSrc: ["'self'"],
       scriptSrc: [
         "'self'",
         "unsafe-inline",
