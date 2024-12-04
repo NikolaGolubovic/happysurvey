@@ -10,8 +10,12 @@ const config = {
   host: params.hostname,
   port: params.port,
   database: params.pathname.split("/")[1],
-  ssl: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
+
+console.log("CONFIG", config);
 
 const pool = new Pool(config);
 

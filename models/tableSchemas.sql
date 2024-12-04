@@ -22,6 +22,18 @@ CREATE TABLE survey (
 	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- better
+
+CREATE TABLE survey (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,  -- changed to INTEGER
+    survey_name VARCHAR(150) NOT NULL,
+    survey_string TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deadline TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP + INTERVAL '5 days',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- added parentheses around user_id
+);
+
 
 CREATE TABLE question (
 	id serial PRIMARY KEY,
@@ -42,6 +54,29 @@ CREATE TABLE question_votes (
    question_choices_id serial,
 	score INT DEFAULT 0,
    FOREIGN KEY (question_choices_id) REFERENCES question_choices(id) ON DELETE CASCADE
+);
+
+
+-- better
+CREATE TABLE question (
+    id SERIAL PRIMARY KEY,
+    survey_id INTEGER NOT NULL,  -- changed to INTEGER
+    question_name VARCHAR(200),
+    FOREIGN KEY (survey_id) REFERENCES survey(id) ON DELETE CASCADE
+);
+
+CREATE TABLE question_choices (
+    id SERIAL PRIMARY KEY,
+    question_id INTEGER,  -- changed to INTEGER
+    choice VARCHAR(200),
+    FOREIGN KEY (question_id) REFERENCES question(id) ON DELETE CASCADE
+);
+
+CREATE TABLE question_votes (
+    id SERIAL PRIMARY KEY,
+    question_choices_id INTEGER,  -- changed to INTEGER
+    score INT DEFAULT 0,
+    FOREIGN KEY (question_choices_id) REFERENCES question_choices(id) ON DELETE CASCADE
 );
 
 INSERT INTO users(username, password) VALUES ('nikola', 'misterija');
